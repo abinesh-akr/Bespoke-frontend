@@ -1,0 +1,18 @@
+<div class="chef-container">
+    <h2>Your Assigned Orders</h2>
+    <mat-card *ngFor="let order of orders" class="order-card">
+      <mat-card-content>
+        <p>Order ID: {{ order._id }}</p>
+        <p>Total: ${{ order.total }}</p>
+        <p>Status: {{ order.status }}</p>
+        <p>User: {{ order.user?.name || 'Unknown' }} ({{ order.user?.email || 'N/A' }})</p>
+        <div *ngFor="let item of order.items">
+          <p>{{ item.food.name }} - Quantity: {{ item.quantity }}</p>
+        </div>
+        <button mat-raised-button color="primary" *ngIf="order.status === 'pending'" (click)="completeOrder(order._id)">Completed</button>
+      </mat-card-content>
+    </mat-card>
+    <button mat-raised-button color="primary" (click)="loadOrders()">Refresh</button>
+    <button mat-raised-button color="primary" routerLink="/chef/login">Logout</button>
+    <p *ngIf="!orders.length && ordersLoaded">No orders assigned.</p>
+  </div>

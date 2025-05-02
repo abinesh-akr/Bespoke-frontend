@@ -1,0 +1,10 @@
+<mat-toolbar class="admin-navbar">
+    <span class="brand">Admin Dashboard</span>
+    <div class="nav-links">
+      <a mat-button routerLink="/admin/add-food" routerLinkActive="active">Add Food</a>
+      <a mat-button routerLink="/admin/add-chef" routerLinkActive="active">Add Chef</a>
+      <a mat-button routerLink="/admin/view-history" routerLinkActive="active">View History</a>
+      <a mat-button routerLink="/admin/modify-foods" routerLinkActive="active">Modify Foods</a>
+      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    </div>
+  </mat-toolbar>
