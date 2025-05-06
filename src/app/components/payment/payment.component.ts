@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { OrderService } from '../../services/order.service';
-import * as L from 'leaflet';
+import * as L from 'leaflet/dist/leaflet';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Observable, map, startWith } from 'rxjs';
