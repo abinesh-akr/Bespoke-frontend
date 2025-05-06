@@ -1,0 +1,212 @@
+/* Importing Google Fonts for professional typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Defining color variables directly in SCSS for Sass compatibility */
+$primary-color: #ff4d3e;
+$accent-color: #ff6b5e;
+$text-color: #2d2d2d;
+$background-color: #ffffff;
+$card-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease-in-out;
+
+/* Defining CSS custom properties for browser-level styling */
+:root {
+  --primary-color: #{$primary-color};
+  --accent-color: #{$accent-color};
+  --text-color: #{$text-color};
+  --background-color: #{$background-color};
+  --card-shadow: #{$card-shadow};
+  --transition: #{$transition};
+}
+
+.navbar {
+  background: linear-gradient(90deg, darken($primary-color, 15%), darken($accent-color, 10%));
+  color: $background-color;
+  padding: 1rem 2rem;
+  box-shadow: $card-shadow;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
+
+  .brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $background-color;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: fadeInDown 0.6s ease;
+    transition: $transition;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Added for better readability */
+
+    &:hover {
+      color: darken($background-color, 5%); /* Slightly darker for hover but still readable */
+      transform: scale(1.05);
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+
+    .nav-link {
+      color: $background-color;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      position: relative;
+      transition: $transition;
+      animation: slideIn 0.6s ease-out forwards;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Added for better readability */
+
+      &:hover {
+        color: darken($background-color, 10%); /* Slightly darker for hover but still readable */
+        transform: translateY(-2px);
+      }
+
+      &.active {
+        color: darken($background-color, 15%);
+        font-weight: 600;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: $background-color;
+          transform: scaleX(1);
+          transform-origin: bottom left;
+          transition: transform 0.3s ease-out;
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $background-color;
+        transform: scaleX(0);
+        transform-origin: bottom left;
+        transition: transform 0.3s ease-out;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+      }
+    }
+
+    .logout-button {
+      background: $primary-color;
+      color:green($color: #000000);
+      padding: 0.5rem 1.5rem;
+      border-radius: 5px;
+      transition: $transition;
+      animation: slideIn 0.6s ease-out forwards;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Added for better readability */
+
+      &:hover {
+        background: darken($primary-color, 10%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+.animation-delay {
+  &.delay-0 { animation-delay: 0ms; }
+  &.delay-1 { animation-delay: 150ms; }
+  &.delay-2 { animation-delay: 300ms; }
+  &.delay-3 { animation-delay: 450ms; }
+  &.delay-4 { animation-delay: 600ms; }
+  &.delay-5 { animation-delay: 750ms; }
+  &.delay-6 { animation-delay: 900ms; }
+  &.delay-7 { animation-delay: 1050ms; }
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+
+    .brand {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Adjusted for smaller screens */
+    }
+
+    .nav-links {
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      text-align: center;
+
+      .nav-link {
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Adjusted for smaller screens */
+      }
+
+      .logout-button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Adjusted for smaller screens */
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.5rem;
+
+    .brand {
+      font-size: 1.3rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Adjusted for smaller screens */
+    }
+
+    .nav-links {
+      .nav-link {
+        font-size: 0.9rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Adjusted for smaller screens */
+      }
+
+      .logout-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Adjusted for smaller screens */
+      }
+    }
+  }
+}

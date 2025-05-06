@@ -1,0 +1,234 @@
+.admin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+  padding: 2rem;
+  background: linear-gradient(rgba(40, 40, 40, 0.85), rgba(40, 40, 40, 0.85)),
+  url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center fixed;
+background-size: cover;
+background-blend-mode: multiply;
+}
+
+.admin-card {
+  width: 600px;
+  max-width: 95%;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border-radius: 16px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.8s ease-out;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  mat-card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    mat-card-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2d2d2d;
+    }
+  }
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+mat-form-field {
+  width: 100%;
+  background: #f9f9f9;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeInUp 0.5s ease-out;
+
+  &.delay-0 { animation-delay: 0ms; }
+  &.delay-1 { animation-delay: 100ms; }
+  &.delay-2 { animation-delay: 200ms; }
+  &.delay-3 { animation-delay: 300ms; }
+  &.delay-4 { animation-delay: 400ms; }
+  &.delay-5 { animation-delay: 500ms; }
+  &.delay-6 { animation-delay: 600ms; }
+  &.delay-7 { animation-delay: 700ms; }
+
+  mat-label {
+    color: #555;
+    font-weight: 500;
+  }
+
+  input, mat-select {
+    color: #333;
+
+    &::placeholder {
+      color: #aaa;
+      font-style: italic;
+    }
+  }
+
+  &:hover {
+    background: #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    mat-label {
+      color: #ff6f61;
+    }
+  }
+
+  &[readonly] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  animation: fadeInUp 0.5s ease-out;
+  animation-delay: 800ms;
+
+  &:hover {
+    border-color: #ff6f61;
+    background: #fff;
+    color: #ff6f61;
+  }
+}
+
+.image-preview {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  animation: fadeInUp 0.5s ease-out;
+  animation-delay: 900ms;
+
+  img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+button {
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  animation: fadeInUp 0.5s ease-out;
+
+  &[color="primary"] {
+    background: linear-gradient(90deg, #ff6f61, #ff8a75);
+    color: white;
+    animation-delay: 1000ms;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(90deg, #ff5849, #ff7360);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  }
+
+  &[color="warn"] {
+    background: linear-gradient(90deg, #ff3d00, #d32f2f);
+    color: white;
+    animation-delay: 1100ms;
+    margin-top: 0.5rem;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(90deg, #e03500, #b92828);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-card {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  mat-card-title {
+    font-size: 1.6rem;
+  }
+
+  .image-preview img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-card {
+    padding: 1rem;
+  }
+
+  mat-card-title {
+    font-size: 1.4rem;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .image-preview img {
+    max-width: 120px;
+    max-height: 120px;
+  }
+}

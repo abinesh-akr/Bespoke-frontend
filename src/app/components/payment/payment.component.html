@@ -1,0 +1,53 @@
+<div class="payment-container">
+  <mat-card class="payment-card bounce-in">
+    <mat-card-header>
+      <mat-card-title>Payment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div #map class="map pop-in delay-0"></div>
+      <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="form-content">
+        <button mat-raised-button color="primary" type="button" (click)="getUserLocation()" class="pop-in delay-1">Use My Location</button>
+        <mat-form-field class="pop-in delay-2">
+          <mat-label>Delivery Location (City/Village)</mat-label>
+          <input
+            matInput
+            formControlName="location"
+            [matAutocomplete]="auto"
+            placeholder="e.g., Virudhunagar"
+            required
+          >
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onLocationSelected($event)">
+            <mat-option *ngFor="let location of filteredLocations | async" [value]="location.name">
+              {{ location.name }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="paymentForm.get('location')?.hasError('required')">Location is required</mat-error>
+          <mat-error *ngIf="paymentForm.get('location')?.hasError('invalidLocation')">Invalid city/village in Tamil Nadu</mat-error>
+        </mat-form-field>
+        <mat-form-field class="pop-in delay-3">
+          <mat-label>Card Number</mat-label>
+          <input matInput formControlName="cardNumber" required>
+          <mat-error *ngIf="paymentForm.get('cardNumber')?.hasError('required')">Card number is required</mat-error>
+          <mat-error *ngIf="paymentForm.get('cardNumber')?.hasError('pattern')">Enter a 16-digit card number</mat-error>
+        </mat-form-field>
+        <mat-form-field class="pop-in delay-4">
+          <mat-label>Expiry Date (MM/YY)</mat-label>
+          <input matInput formControlName="expiry" required>
+          <mat-error *ngIf="paymentForm.get('expiry')?.hasError('required')">Expiry date is required</mat-error>
+          <mat-error *ngIf="paymentForm.get('expiry')?.hasError('pattern')">Enter MM/YY format</mat-error>
+        </mat-form-field>
+        <mat-form-field class="pop-in delay-5">
+          <mat-label>CVV</mat-label>
+          <input matInput formControlName="cvv" required>
+          <mat-error *ngIf="paymentForm.get('cvv')?.hasError('required')">CVV is required</mat-error>
+          <mat-error *ngIf="paymentForm.get('cvv')?.hasError('pattern')">Enter a 3-digit CVV</mat-error>
+        </mat-form-field>
+        <div *ngIf="deliveryFee !== null" class="delivery-fee pop-in delay-6">
+          <p><strong>Delivery Fee:</strong> ₹{{ deliveryFee.toFixed(2) }}</p>
+        </div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="paymentForm.invalid" class="pop-in delay-7">Pay Now</button>
+        <button mat-raised-button color="accent" type="button" (click)="back()" class="pop-in delay-8">Cancel</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

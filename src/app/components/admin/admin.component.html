@@ -1,0 +1,94 @@
+<div class="admin-container">
+  <mat-card class="admin-card fade-in">
+    <mat-card-header>
+      <mat-card-title>Admin Dashboard</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="admin-sections">
+        <!-- Modify Food -->
+        <div class="section fade-in-up delay-0">
+          <h3>Modify Food</h3>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Food ID</mat-label>
+              <input matInput [(ngModel)]="foodId">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="foodName">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Price</mat-label>
+              <input matInput type="number" [(ngModel)]="foodPrice">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" (click)="updateFood()">Update Food</button>
+          <button mat-raised-button color="warn" (click)="deleteFood()">Delete Food</button>
+        </div>
+
+        <!-- Modify User -->
+        <div class="section fade-in-up delay-1">
+          <h3>Modify User</h3>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>User ID</mat-label>
+              <input matInput [(ngModel)]="userId">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="userName">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="userEmail">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Loyalty Points</mat-label>
+              <input matInput type="number" [(ngModel)]="userLoyaltyPoints">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" (click)="updateUser()">Update User</button>
+          <button mat-raised-button color="warn" (click)="deleteUser()">Delete User</button>
+        </div>
+
+        <!-- View All Order Histories -->
+        <div class="section fade-in-up delay-2">
+          <h3>All Order Histories</h3>
+          <button mat-raised-button color="primary" (click)="viewOrders()">View Orders</button>
+          <mat-list *ngIf="orders.length">
+            <mat-list-item *ngFor="let order of orders" class="order-item">
+              Order by {{ order.user.name }} ({{ order.user.email }}) - Total: ${{ order.total }} - Status: {{ order.status }}
+            </mat-list-item>
+          </mat-list>
+        </div>
+
+        <!-- Manage Chefs -->
+        <div class="section fade-in-up delay-3">
+          <h3>Manage Chefs</h3>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Chef Name</mat-label>
+              <input matInput [(ngModel)]="chefName">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Image URL</mat-label>
+              <input matInput [(ngModel)]="chefImage">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Specialty</mat-label>
+              <input matInput [(ngModel)]="chefSpecialty">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" (click)="addChef()">Add Chef</button>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Chef ID</mat-label>
+              <input matInput [(ngModel)]="chefId">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="warn" (click)="deleteChef()">Delete Chef</button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

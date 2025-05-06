@@ -1,0 +1,42 @@
+<div class="chef-container">
+  <div class="header">
+    
+    <h2 class="bounce-in">Your Assigned Orders</h2>
+    <div class="profile-icon bounce-in" (click)="toggleProfile()">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Icon" />
+    </div>
+  </div>
+  <button mat-raised-button color="primary" (click)="loadOrders()" class="fade-in delay-0">Refresh</button>
+  <div class="profile-modal" *ngIf="showProfile">
+    <div class="profile-content slide-in">
+      <button class="close-btn" (click)="toggleProfile()">✖</button>
+      <h3>Chef Profile</h3>
+      <div class="profile-details">
+        <img *ngIf="chef?.image" [src]="chef?.image" alt="Chef {{ chef?.name }}" class="chef-image" />
+        <p><strong>Name:</strong> {{ chef?.name || 'Unknown' }}</p>
+        <p><strong>Email:</strong> {{ chef?.email || 'N/A' }}</p>
+        <p><strong>Specialty:</strong> {{ chef?.specialty || 'Not specified' }}</p>
+        <button mat-raised-button color="accent" routerLink="/chef/login" class="fade-in delay-1">Logout</button>
+      </div>
+    </div>
+  </div>
+  <mat-card *ngFor="let order of orders; let i = index" class="order-card pop-in" [ngClass]="['delay-' + i, 'color-' + (i % 4)]">
+    <mat-card-content>
+      <p class="order-detail"><span class="label">Order ID:</span> {{ order._id }}</p>
+      <p class="order-detail"><span class="label">Total:</span> ${{ order.total }}</p>
+      <p class="order-detail"><span class="label">Status:</span> {{ order.status }}</p>
+      <p class="order-detail"><span class="label">User:</span> {{ order.user?.name || 'Unknown' }} ({{ order.user?.email || 'N/A' }})</p>
+      <div class="order-items">
+        <div *ngFor="let item of order.items" class="item">
+          <p>{{ item.food.name }} - Quantity: {{ item.quantity }}</p>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" *ngIf="order.status === 'pending'" (click)="completeOrder(order._id)">Mark as Out for Delivery</button>
+    </mat-card-content>
+  </mat-card>
+  <div class="action-buttons">
+    <button mat-raised-button color="primary" (click)="loadOrders()" class="fade-in delay-0">Refresh</button>
+    <button mat-raised-button color="accent" routerLink="/chef/login" class="fade-in delay-1">Logout</button>
+  </div>
+  <p *ngIf="!orders.length && ordersLoaded" class="no-orders fade-in delay-2">No orders assigned.</p>
+</div>
