@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+<div class="chef-container">
+  <h2>Our Expert Chefs</h2>
+  <mat-card *ngFor="let chef of chefs" class="chef-card animate__animated animate__fadeIn">
+    <img mat-card-image [src]="chef.image" alt="{{chef.name}}" >
+    <mat-card-content>
+      <h3>{{chef.name}}</h3>
+      <p>Specialty: {{chef.specialty}}</p>
+      <p>Rating: {{chef.rating}} ★</p>
+    </mat-card-content>
+  </mat-card>
+</div>

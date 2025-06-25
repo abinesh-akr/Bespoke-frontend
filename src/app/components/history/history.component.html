@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="history-container">
+    <h2>Purchase History</h2>
+    <mat-card *ngFor="let order of orders" class="order-card">
+      <mat-card-content>
+        <p>Order ID: {{order._id}}</p>
+        <p>Total: ${{order.total}}</p>
+        <p>Status: {{order.status}}</p>
+        <div *ngFor="let item of order.items">
+          <img mat-card-image [src]="item.food.image" alt="{{item.food.name}}" >
+          <p>{{item.food.name}} - Quantity: {{item.quantity}}</p>
+          
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>

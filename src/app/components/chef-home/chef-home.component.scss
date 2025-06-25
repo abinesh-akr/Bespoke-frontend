@@ -1,0 +1,26 @@
+.chef-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+  }
+  
+  h2 {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .order-card {
+    width: 600px;
+    margin: 10px 0;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+  }
+  
+  button {
+    margin: 20px 0;
+  }

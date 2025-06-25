@@ -1,0 +1,24 @@
+<app-navbar></app-navbar>
+<div class="cart-container">
+  <h2>Your Cart</h2>
+  <div *ngIf="isLoading" class="loading">Updating cart...</div>
+  <mat-card *ngFor="let item of cart.items" class="cart-item">
+    <img mat-card-image [src]="item.food.image" alt="{{item.food?.name || 'Unknown'}}">
+    <mat-card-content>
+      <h3>{{item.food?.name || 'Unknown Item'}}</h3>
+      <p>Price: ${{item.food?.price || 0 | number:'1.2-2'}}</p>
+      <p>Quantity Available: {{item.food?.quantityAvailable || 0}}</p>
+      <div class="quantity-control">
+        <mat-form-field>
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" min="0" [(ngModel)]="item.quantity" (click)="updateQuantity(item)" >
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="updateQuantity(item)" [disabled]="isLoading">Update</button>
+      </div>
+      <p>Bespoke Note: {{item.bespokeNote || 'None'}}</p>
+    </mat-card-content>
+  </mat-card>
+  <div class="cart-actions">
+    <button mat-raised-button color="primary" (click)="checkout()" [disabled]="!cart.items.length || isLoading">Proceed to Payment</button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.admin-navbar {
+    background: linear-gradient(45deg, #d0f1ea, #2f0cf9);
+    padding: 30px 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(14, 12, 12);
+    gap: 200px;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+  
+  a {
+    color: rgba(173, 250, 255, 0.97);
+    font-size: 16px;
+    transition: color 0.3s;
+    color: #ffffff;
+  }
+  
+  a:hover, .active {
+    color: #3f00fd;
+  }
+  
+  button {
+    margin-left: 20px;
+    color: #3f00fd;
+  }
