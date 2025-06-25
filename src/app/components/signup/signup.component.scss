@@ -1,0 +1,36 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.signup-card {
+  width: 350px; /* Adjusted to match the image width */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow for a cleaner look */
+  background: rgba(255, 255, 255, 0.95); /* Slightly more opaque for better readability */
+  border-radius: 8px; /* Added rounded corners to match the image */
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px; /* Added spacing between fields */
+}
+
+button {
+  width: 100%;
+  margin-top: 15px; /* Increased margin for better spacing */
+}
+
+.login-link {
+  color: #1976d2; /* Blue color for the link */
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: #135ba1; /* Darker blue on hover */
+  }
+}

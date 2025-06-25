@@ -1,0 +1,464 @@
+/* Importing Google Fonts for professional typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Defining color variables directly in SCSS for Sass compatibility */
+$primary-color: #ff4d3e;
+$accent-color: #ff6b5e;
+$text-color: #2d2d2d;
+$background-color: #ffffff;
+$card-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease-in-out;
+
+/* Defining CSS custom properties for browser-level styling */
+:root {
+  --primary-color: #{$primary-color};
+  --accent-color: #{$accent-color};
+  --text-color: #{$text-color};
+  --background-color: #{$background-color};
+  --card-shadow: #{$card-shadow};
+  --transition: #{$transition};
+}
+
+.home-container {
+  min-height: 100vh;
+  width: 97%;
+  padding: 2rem;
+  background: linear-gradient(rgba(240, 244, 248, 0.9), rgba(240, 244, 248, 0.9)),
+    url('https://images.unsplash.com/photo-1490818387583-1baba5e638af') no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: overlay;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+}
+.hero {
+  text-align: center;
+  padding: 80px 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: $background-color;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  margin-bottom: 3rem;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+}
+
+.search {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar {
+  width: 70%;
+  max-width: 700px;
+  transition: $transition;
+  background: $background-color;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+
+  mat-label {
+    color: $text-color;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  input {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    border: none;
+    background: transparent;
+    color: $text-color;
+    transition: $transition;
+
+    &::placeholder {
+      color: #aaa;
+      font-style: italic;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 0 0 2px $primary-color;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.food-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+
+.food-card {
+  background: $background-color;
+  border-radius: 16px;
+  box-shadow: $card-shadow;
+  width: 350px;
+  overflow: hidden;
+  transition: $transition;
+  animation: zoomIn 0.6s ease-out forwards;
+  position: relative;
+  border: 1px solid transparent;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    border-color: $primary-color;
+
+    .image-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button {
+      background: $accent-color;
+    }
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-bottom: 4px solid $primary-color;
+      transition: $transition;
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba($primary-color, 0.8);
+      color: $background-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: $transition;
+
+      p {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+
+  mat-card-content {
+    padding: 1.5rem;
+    text-align: center;
+
+    h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: $text-color;
+      margin-bottom: 0.75rem;
+      transition: $transition;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .price {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+    }
+
+    .quantity, .bespoke, .tags {
+      font-size: 0.95rem;
+      color: #7f8c8d;
+      margin-bottom: 0.5rem;
+    }
+
+    mat-form-field {
+      width: 100%;
+      margin: 0.75rem 0;
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 0.25rem;
+      transition: $transition;
+
+      mat-label {
+        color: $text-color;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+
+      input {
+        font-size: 0.95rem;
+        border-radius: 5px;
+        border: 1px solid lighten($primary-color, 30%);
+        padding: 0.5rem;
+        background: $background-color;
+        color: $text-color;
+        transition: $transition;
+
+        &::placeholder {
+          color: #aaa;
+          font-style: italic;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 5px rgba($primary-color, 0.3);
+        }
+      }
+
+      &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    button {
+      background: $primary-color;
+      color: $background-color;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      transition: $transition;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background: $accent-color;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+.cart-action {
+  text-align: center;
+  margin: 3rem 0;
+
+  button {
+    background: linear-gradient(90deg, $primary-color, $accent-color);
+    color: $background-color;
+    font-weight: 500;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    transition: $transition;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      background: linear-gradient(90deg, darken($primary-color, 10%), darken($accent-color, 10%));
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.animation-delay {
+  &.delay-0 { animation-delay: 0ms; }
+  &.delay-1 { animation-delay: 150ms; }
+  &.delay-2 { animation-delay: 300ms; }
+  &.delay-3 { animation-delay: 450ms; }
+  &.delay-4 { animation-delay: 600ms; }
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .food-grid {
+    gap: 1.5rem;
+  }
+
+  .food-card {
+    width: 280px;
+  }
+
+  .hero {
+    padding: 60px 0;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  .search-bar {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding: 40px 0;
+    border-radius: 12px;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+  }
+
+  .search-bar {
+    width: 90%;
+  }
+
+  .food-card {
+    width: 100%;
+    max-width: 320px;
+
+    .image-wrapper {
+      height: 200px;
+    }
+  }
+
+  .cart-action {
+    button {
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 1rem;
+  }
+
+  .hero {
+    padding: 30px 0;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .search-bar {
+    width: 100%;
+
+    input {
+      font-size: 1rem;
+      padding: 0.6rem 1rem;
+    }
+  }
+
+  .food-card {
+    max-width: 280px;
+
+    mat-card-content {
+      h3 {
+        font-size: 1.4rem;
+      }
+
+      .description, .price, .quantity, .bespoke, .tags {
+        font-size: 0.9rem;
+      }
+
+      button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  .cart-action {
+    button {
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+}

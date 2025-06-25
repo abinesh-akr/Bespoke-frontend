@@ -1,0 +1,29 @@
+<div class="history-container">
+  <h2 class="title">Overall Purchase History</h2>
+  <div class="orders-grid">
+    <mat-card *ngFor="let order of orders; let i = index" class="order-card" [ngClass]="'color-' + (i % 4)">
+      <mat-card-content>
+        <div class="order-details">
+          <p class="detail-item"><span class="label">Order ID:</span> {{ order._id }}</p>
+          <p class="detail-item"><span class="label">Total:</span> ${{ order.total }}</p>
+          <p class="detail-item"><span class="label">Status:</span> {{ order.status }}</p>
+        </div>
+        <div class="user-info">
+          <p class="detail-item"><span class="label">User:</span> {{ order.user.name || 'Unknown' }} ({{ order.user.email || 'N/A' }})</p>
+          <p class="detail-item"><span class="label">Chef:</span> {{ order.chef.name || 'Unknown' }}</p>
+          <div *ngIf="order.chef?.image" class="chef-image flip-in">
+            <img [src]="order.chef.image" alt="Chef {{ order.chef.name }}" />
+          </div>
+        </div>
+        <div class="items-list">
+          <div *ngFor="let item of order.items" class="item">
+            <div *ngIf="item.food.image" class="food-image flip-in">
+              <img [src]="item.food.image" alt="{{ item.food.name }}" />
+            </div>
+            <p class="item-name">{{ item.food.name }} - Quantity: {{ item.quantity }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

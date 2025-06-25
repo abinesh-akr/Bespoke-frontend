@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<div class="home-container">
+  <section class="hero">
+    <h1 class="animate__animated animate__fadeInDown">Welcome to Foodie Delight</h1>
+    <p class="animate__animated animate__fadeInUp delay-1">Experience unparalleled quality and service with our premium food delivery.</p>
+    <p class="animate__animated animate__fadeInUp delay-2" *ngIf="user?.preferences?.length">Recommended for you: {{ user.preferences.join(', ') }}</p>
+  </section>
+  <section class="search animate__animated animate__fadeIn">
+    <mat-form-field class="search-bar">
+      <mat-label>Search Food</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (input)="filterFoods()" placeholder="Search by name or tags">
+    </mat-form-field>
+  </section>
+  <section class="food-grid">
+    <mat-card *ngFor="let food of filteredFoods; let i = index" class="food-card" [ngClass]="'animation-delay delay-' + (i % 5)">
+      <div class="image-wrapper">
+        <img [src]="food.image" alt="{{food.name}}">
+        <div class="image-overlay">
+          <p>Click to Add to Cart</p>
+        </div>
+      </div>
+      <mat-card-content>
+        <h3>{{food.name}}</h3>
+        <p class="description">{{food.description || 'No description available'}}</p>
+        <p class="price">Price: ${{food.price}}</p>
+        <p class="quantity">Quantity Available: {{food.quantityAvailable}}</p>
+        <p class="bespoke" *ngIf="food.bespokeOption">Bespoke: {{food.bespokeOption}}</p>
+        <p class="tags" *ngIf="food.tags?.length">Tags: {{food.tags.join(', ')}}</p>
+        <mat-form-field>
+          <mat-label>Bespoke Note</mat-label>
+          <input matInput [(ngModel)]="food.bespokeNote" placeholder="Add custom note">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addToCart(food)">Add to Cart</button>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <section class="cart-action animate__animated animate__fadeIn">
+    <button mat-raised-button color="accent" routerLink="/cart">View Cart</button>
+  </section>
+</div>

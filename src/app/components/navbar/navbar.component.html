@@ -1,0 +1,13 @@
+<mat-toolbar class="navbar">
+  <span class="brand">Foodie Delight</span>
+  <div class="nav-links">
+    <a mat-button routerLink="/home" routerLinkActive="active" class="nav-link animation-delay delay-0">Home</a>
+    <a mat-button routerLink="/about" routerLinkActive="active" class="nav-link animation-delay delay-1">About</a>
+    <a mat-button routerLink="/services" routerLinkActive="active" class="nav-link animation-delay delay-2">Services</a>
+    <a mat-button routerLink="/history" routerLinkActive="active" class="nav-link animation-delay delay-3">History</a>
+    <a mat-button routerLink="/chefs" routerLinkActive="active" class="nav-link animation-delay delay-4">Chefs</a>
+    <a mat-button routerLink="/cart" routerLinkActive="active" class="nav-link animation-delay delay-5">Cart</a>
+    <a mat-button routerLink="/admin" routerLinkActive="active" class="nav-link animation-delay delay-6" *ngIf="isAdmin">Admin</a>
+    <button mat-raised-button color="warn" class="logout-button animation-delay delay-7" (click)="logout()">Logout</button>
+  </div>
+</mat-toolbar>

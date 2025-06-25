@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div class="chef-container">
+  <h2 class="header-title">Our Expert Chefs</h2>
+  <p class="header-subtitle">Meet the culinary masters behind your favorite dishes</p>
+  <div class="chefs-grid">
+    <mat-card *ngFor="let chef of chefs; let i = index" class="chef-card" [ngClass]="'animation-delay delay-' + (i % 5)">
+      <div class="image-wrapper">
+        <img class="chef-image" [src]="chef.image" alt="{{chef.name}}" />
+        <div class="image-overlay">
+          <span class="icon-overlay">👨‍🍳</span>
+        </div>
+      </div>
+      <mat-card-content class="chef-content">
+        <h3 class="chef-name">{{chef.name}}</h3>
+        <div class="chef-details">
+          <p class="detail-item">
+            <span class="icon-detail">🍴</span>
+            Specialty: <span class="highlight">{{chef.specialty}}</span>
+          </p>
+          <p class="detail-item">
+            <span class="icon-detail">⭐</span>
+            Rating: <span class="highlight">{{chef.rating}} ★</span>
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

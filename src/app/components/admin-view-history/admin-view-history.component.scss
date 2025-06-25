@@ -1,0 +1,244 @@
+.history-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffd1dc 0%, #e1cfff 100%);
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(rgba(40, 40, 40, 0.85), rgba(40, 40, 40, 0.85)),
+  url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center fixed;
+background-size: cover;
+background-blend-mode: multiply;
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    animation: bounceIn 0.8s ease-out;
+  }
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.order-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  animation: popIn 0.6s ease-out;
+  transform: rotate(2deg);
+
+  &.color-0 {
+    background: #ffebef; /* Soft Pink */
+    transform: rotate(2deg);
+  }
+  &.color-1 {
+    background: #e6ffed; /* Mint Green */
+    transform: rotate(-2deg);
+  }
+  &.color-2 {
+    background: #f0e7ff; /* Light Lavender */
+    transform: rotate(1deg);
+  }
+  &.color-3 {
+    background: #fff3e6; /* Peach */
+    transform: rotate(-1deg);
+  }
+
+  &:hover {
+    transform: rotate(45deg) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.order-details, .user-info, .items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.order-details {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.user-info {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.items-list {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.detail-item, .item-name {
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+
+  .label {
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-right: 0.5rem;
+  }
+
+  &:hover {
+    color: #ff6f61;
+    transform: translateX(5px);
+  }
+}
+
+.item-name {
+  font-style: italic;
+}
+
+.chef-image, .food-image {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.chef-image img {
+  border-color: #ff6f61; /* Coral */
+}
+
+.food-image img {
+  border-color: #6bd4a5; /* Mint Green */
+  width: 60px;
+  height: 60px;
+}
+
+.flip-in {
+  animation: flipIn 0.6s ease-out;
+}
+
+.chef-image img:hover, .food-image img:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Staggered animation for cards */
+.order-card:nth-child(1) { animation-delay: 0ms; }
+.order-card:nth-child(2) { animation-delay: 150ms; }
+.order-card:nth-child(3) { animation-delay: 300ms; }
+.order-card:nth-child(4) { animation-delay: 450ms; }
+.order-card:nth-child(5) { animation-delay: 600ms; }
+.order-card:nth-child(6) { animation-delay: 750ms; }
+.order-card:nth-child(7) { animation-delay: 900ms; }
+.order-card:nth-child(8) { animation-delay: 1050ms; }
+.order-card:nth-child(9) { animation-delay: 1200ms; }
+.order-card:nth-child(10) { animation-delay: 1350ms; }
+
+/* Animations */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(2deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(2deg);
+  }
+}
+
+@keyframes flipIn {
+  0% {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .history-container {
+    padding: 2rem 1rem;
+  }
+
+  .orders-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .order-card {
+    transform: rotate(0deg) !important;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .history-container {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .order-card {
+    padding: 1rem;
+  }
+
+  .detail-item, .item-name {
+    font-size: 0.9rem;
+  }
+
+  .chef-image img, .food-image img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .food-image img {
+    width: 50px;
+    height: 50px;
+  }
+}

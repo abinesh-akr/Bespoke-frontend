@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="history-container">
+  <h2 class="header-title">Your Order History</h2>
+  <p class="header-subtitle">Explore your past purchases</p>
+  <div class="orders-grid">
+    <mat-card *ngFor="let order of orders; let i = index" class="order-card" [ngClass]="'animation-delay delay-' + (i % 5)">
+      <mat-card-header class="card-header">
+        <span class="icon-header">🛒</span>
+        <mat-card-title class="card-title">Order #{{order._id | slice:0:8}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="order-content">
+        <div class="order-details">
+          <p class="detail-item">
+            <span class="icon-detail">💵</span>
+            Total: <span class="highlight">Rs {{order.total.toFixed(2)}}</span>
+          </p>
+          <p class="detail-item" [ngClass]="{'status-pending': order.status === 'Pending', 'status-out-for-delivery': order.status === 'Out for Delivery', 'status-delivered': order.status === 'Delivered'}">
+            <span class="icon-detail">ℹ️</span>
+            Status: <span class="highlight">{{order.status}}</span>
+          </p>
+        </div>
+        <div class="items-list">
+          <div *ngFor="let item of order.items" class="item">
+            <div class="image-wrapper">
+              <img class="order-image" [src]="item.food.image" alt="{{item.food.name}}" />
+            </div>
+            <div class="item-detail">
+              <p>{{item.food.name}} - Quantity: <span class="highlight">{{item.quantity}}</span></p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
