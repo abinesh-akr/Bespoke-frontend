@@ -1,0 +1,191 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Food Delivery System - Project Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .doc-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        .highlight {
+            color: #7c3aed;
+            font-weight: 600;
+        }
+        .link {
+            color: #2563eb;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .link:hover {
+            color: #1e40af;
+        }
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="doc-card">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Bespoke Food Delivery System: Project Documentation</h1>
+            <p class="text-lg text-gray-700 mb-4">
+                The <span class="highlight">Bespoke Food Delivery System</span> is a mini project developed by myself <span class="highlight">Abineshkumar S</span> and my teammate <span class="highlight">Anish karthik A P</span> for the <span class="highlight">19CS694-Web User Interface Design</span> course. This document outlines the key concepts and technologies used in building this virtual food ordering and delivery platform, highlighting the technical and design principles applied to create a seamless experience for users, admins, and chefs.
+            </p>
+
+            <!-- Video Section -->
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Project Demo</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/l9MbfCwxuK8" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Project Overview</h2>
+            <p class="text-gray-600 mb-6">
+                The Bespoke Food Delivery System is a full-stack web application designed to facilitate online food ordering and delivery. Built using <span class="highlight">TypeScript</span>, <span class="highlight">Node.js</span>, and <span class="highlight">Angular</span>, it integrates modern web technologies to provide a responsive, user-friendly interface and efficient backend processing. The system supports user authentication, menu browsing, order placement with virtual payments, and real-time delivery tracking, with additional features for admins and chefs to manage operations.
+            </p>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Key Concepts and Features</h2>
+            <div class="two-column mb-6">
+                <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><span class="highlight">User Authentication</span>: Users can sign up or log in using a valid email, implemented with secure session management and password hashing in Node.js.</li>
+                    <li><span class="highlight">Menu and Cart Management</span>: Users browse menus and add items to a cart, leveraging Angular’s component-based architecture for dynamic UI updates.</li>
+                    <li><span class="highlight">Geolocation and Delivery Fees</span>: Delivery locations are set using <span class="highlight">OpenLayers</span> Maps API, with dynamic delivery fees calculated based on the distance from the restaurant in Sivakasi using geospatial algorithms.</li>
+                </ul>
+                <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><span class="highlight">Admin and Chef Management</span>: Admins manage food items and quantities, and assign chef logins, while chefs mark orders as "out for delivery," supported by MongoDB Atlas for data storage.</li>
+                    <li><span class="highlight">Load Balancing</span>: Orders are assigned to chefs with the least workload using a queue-based data structure, optimizing kitchen efficiency.</li>
+                    <li><span class="highlight">Real-Time Notifications</span>: <span class="highlight">Nodemailer</span> sends real-time email confirmations for successful payments, detailing ordered items and amounts.</li>
+                </ul>
+            </div>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Technology Stack and Deployment</h2>
+            <div class="two-column mb-6">
+                <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><span class="highlight">Frontend</span>: Built with Angular, deployed on <a href="https://bespoke-frontend-yv6f.vercel.app" class="link" target="_blank">Vercel</a>. Angular’s component-based architecture and TypeScript ensure a modular, type-safe UI.</li>
+                    <li><span class="highlight">Backend</span>: Powered by Node.js with Express, hosted on <a href="https://bespoke-backend-lqt3.onrender.com" class="link" target="_blank">Render</a>, handling API requests and business logic.</li>
+                    <li><span class="highlight">Database</span>: MongoDB Atlas provides scalable, schema-based storage for users, orders, and menus.</li>
+                </ul>
+                <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><span class="highlight">Maps</span>: OpenLayers, a powerful open-source mapping library, enables interactive geolocation selection with ESM support for Angular integration.</li>
+                    <li><span class="highlight">Email</span>: Nodemailer facilitates transactional email notifications, integrated with SMTP services for reliable delivery.</li>
+                </ul>
+            </div>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">System Working</h2>
+            <p class="text-gray-600 mb-6">
+                The system employs several advanced concepts:
+                <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li><span class="highlight">Load Balancing</span>: A queue-based algorithm assigns orders to chefs with the least workload, implemented in Node.js to ensure efficient task distribution.</li>
+                    <li><span class="highlight">Dynamic Delivery Fees</span>: Using OpenLayers, the system calculates the distance between the restaurant (Sivakasi) and user-specified delivery locations, applying a fee based on predefined rules.</li>
+                    <li><span class="highlight">Real-Time Email Notifications</span>: Nodemailer integrates with the backend to send automated emails upon successful virtual payments, providing users with detailed order confirmations.</li>
+                </ul>
+            </p>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Learning Outcomes</h2>
+            <div class="two-column mb-6">
+                <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li>Mastered designing intuitive, accessible interfaces using Angular’s reactive forms and components.</li>
+                    <li>Gained expertise in implementing real-time features like email notifications and load balancing algorithms.</li>
+                </ul>
+                <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                    <li>Learned to integrate APIs (maps, virtual payments) and deploy full-stack applications on Vercel and Render.</li>
+                    <li>Developed proficiency in writing clean, type-safe code with TypeScript for maintainability and scalability.</li>
+                </ul>
+            </div>
+
+            <p class="text-lg text-graynobody-700 mb-4">
+                A heartfelt thank you to our mentor for their guidance and support, which were instrumental in bringing this project to fruition.
+            </p>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Project Resources</h2>
+            <p class="text-lg text-gray-700 mb-4">
+                Explore the project:<br>
+                Project live at: <a href="https://bespoke-frontend-yv6f.vercel.app" class="link" target="_blank">https://bespoke-frontend-yv6f.vercel.app</a><br>
+                Backend hosted at: <a href="https://bespoke-backend-lqt3.onrender.com" class="link" target="_blank">https://bespoke-backend-lqt3.onrender.com</a><br>
+                Frontend GitHub: <a href="https://github.com/abinesh-akr/Bespoke-frontend" class="link" target="_blank">https://github.com/abinesh-akr/Bespoke-frontend</a><br>
+                Backend GitHub: <a href="https://github.com/abinesh-akr/Bespoke-backend" class="link" target="_blank">https://github.com/abinesh-akr/Bespoke-backend</a>
+            </p>
+
+            <p class="text-lg text-gray-700 mb-4">
+                We welcome feedback and opportunities to connect with others interested in web development, UI design, or food-tech solutions.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
